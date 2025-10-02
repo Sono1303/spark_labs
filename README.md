@@ -375,7 +375,6 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 ## 5. MÔ HÌNH VÀ CÔNG CỤ SỬ DỤNG
 
 ### 5.1 Pre-built components (không sử dụng pre-trained models)
-**Lưu ý**: Bài tập này không sử dụng pre-trained models mà xây dựng pipeline từ các building blocks cơ bản.
 
 ### 5.2 Spark MLlib Components
 - **RegexTokenizer**: Built-in tokenizer của Spark MLlib
