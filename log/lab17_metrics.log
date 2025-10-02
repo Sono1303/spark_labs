@@ -1,0 +1,31 @@
+=== COMPREHENSIVE NLP PIPELINE PERFORMANCE REPORT ===
+Generated on: Thu Oct 02 09:54:11 ICT 2025
+Records processed: 1000
+
+--- DETAILED STAGE-BY-STAGE PERFORMANCE ---
+Stage 1 - Spark Initialization: 9.323 seconds (63.5%)
+Stage 2 - Data Reading: 2.745 seconds (18.7%)
+Stage 3 - Pipeline Creation: 0.056 seconds (0.4%)
+Stage 4 - Pipeline Training: 1.607 seconds (10.9%)
+Stage 5 - Data Transformation: 0.613 seconds (4.2%)
+Stage 6 - Vocabulary Analysis: 0.272 seconds (1.9%)
+Stage 7 - Results Collection: 0.059 seconds (0.4%)
+
+--- PERFORMANCE SUMMARY ---
+Total Processing Time: 14.675 seconds
+Overall Throughput: 68 records/second
+Training Throughput: 622 records/second
+Transform Throughput: 1632 records/second
+
+--- DATA STATISTICS ---
+Vocabulary size (unique terms): 27009
+Feature vector dimensions: 20000
+Vocabulary density: 27.01 unique terms/document
+Raw TF-IDF L2 norm (sample): 37.368528
+Normalized L2 norm (sample): 1.000000
+Normalization: L2 (Euclidean) normalization applied
+
+--- FILE LOCATIONS ---
+Log file: E:\NLP\spark_labs\log\lab17_metrics.log
+
+For real-time monitoring, access Spark UI at: http://localhost:4040

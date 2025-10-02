@@ -1,0 +1,45 @@
+# Scala & SBT
+target/
+project/target/
+project/project/
+.bsp/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# # Logs
+# *.log
+# logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Spark
+spark-warehouse/
+derby.log
+metastore_db/
+
+# Java
+*.class
+*.jar
+!lib/*.jar
+
+# Scala
+*.tasty
+
+# Build outputs (keep structure but ignore contents)
+# results/ - keep this for pipeline outputs
+# log/ - keep this for metrics

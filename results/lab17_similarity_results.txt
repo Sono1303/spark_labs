@@ -1,0 +1,38 @@
+=== DOCUMENT SIMILARITY ANALYSIS RESULTS ===
+Generated on: Thu Oct 02 09:54:12 ICT 2025
+Analysis completed in: 1.125 seconds
+
+REFERENCE DOCUMENT (ID: 0):
+Beginners BBQ Class Taking Place in Missoula!
+Do you want to get better at making delicious BBQ? You will have the opportunity, put this on your calendar now. Thursday, September 22nd join World Class...
+
+TOP 5 MOST SIMILAR DOCUMENTS:
+
+1. DOCUMENT ID: 268
+   COSINE SIMILARITY: 0.130387
+   TEXT: Mercedes has lifted the veil and presented the new X-Class. Mercedes X-Class is the company’s first large scale production luxury pickup and we reveal all its secrets, including the prices for the German market. The X-Class will be available in Europe, Latin America, South Africa, Australia and New ...
+--------------------------------------------------------------------------------
+2. DOCUMENT ID: 440
+   COSINE SIMILARITY: 0.085494
+   TEXT: Check out the Italian Pasta Salad calories and how many carbs in Italian Pasta Salad. Learn all the nutrition facts about what you eat at GymAmerica.
+Tip: Click on the ingredient links to learn the nutritional information for all the Italian Pasta Salad ingredients. The serving size for any ingredie...
+--------------------------------------------------------------------------------
+3. DOCUMENT ID: 984
+   COSINE SIMILARITY: 0.080085
+   TEXT: Enjoy our variety of meat cuts prepared with authentic Southern Brazilian Style using our open fire grill to unleash all meat flavors, this is what we call ?Churrasco? (Brazilian barbecue). All of our specialty meats will be brought to you, at your table, by our skilled ?Gauchos? (Brazilian Cowboys)...
+--------------------------------------------------------------------------------
+4. DOCUMENT ID: 684
+   COSINE SIMILARITY: 0.080035
+   TEXT: Many students have never been to a museum before. While we want children to respect the museum and its artwork, tours emphasize interaction—we encourage students to talk about what they see and ask questions. Tours aren’t a lecture—they are a chance for your class to explore and express themselves.
+...
+--------------------------------------------------------------------------------
+5. DOCUMENT ID: 278
+   COSINE SIMILARITY: 0.076474
+   TEXT: Class A Burn Prop - Stove Simulator With Overhead Burn Hood - Fire Facilities, Inc.
+The stove simulator assembly consists of 1/4” thick prime painted angles and 12 gage stainless steel panels bolted together with 3/8” diameter bolts through pre-punched holes for ease of assembly. The prime painted 1...
+--------------------------------------------------------------------------------
+
+NOTES:
+- Cosine similarity ranges from -1 to 1 (1 = identical, 0 = orthogonal)
+- Similarity calculated using L2-normalized TF-IDF vectors
+- For normalized vectors: cosine_similarity = dot_product

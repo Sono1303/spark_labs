@@ -1,0 +1,4 @@
+[repositories]
+  local
+  central: https://repo1.maven.org/maven2/
+  typesafe-ivy-releases: https://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/[revision]/[type]s/[artifact](-[classifier]).[ext], bootOnly
