@@ -1,13 +1,13 @@
-# Báo cáo Bài tập Lab17 - Spark NLP Pipeline
+# ## 1. CÁC BƯC THỰC HIỆNáo cáo Bài tập Lab17 - Spark NLP Pipeline
 
 ## 1. CÁC BƯỚC THỰC HIỆN
 
 ### 1.1 Thiết lập môi trường phát triển
-- **Ngôn ngữ lập trình**: Scala 2.12.x
+- **Ngôn ngữ lập trình**: Sca## 3. GIẢI THÍCH KẾT QUẢ ĐẠT ĐƯCa 2.12.x
 - **Framework**: Apache Spark 3.5.1 với MLlib
 - **Build tool**: SBT (Simple Build Tool) 1.11.6
 - **Java Runtime**: OpenJDK 17 LTS
-- **Dữ liệu**: C4 Common Crawl dataset (30K records)
+- **Dữ liệu**: C4 Common Crawl dataset (30K ## 6. MÔ HÌNH VÀ CÔNG CỤ Sử DỤNGecords)
 - **Document limit**: Configurable với `limitDocuments` variable (default: 1000 records)
 - **Performance monitoring**: Detailed timing measurements cho từng processing stage
 - **Vector normalization**: L2 (Euclidean) normalization
