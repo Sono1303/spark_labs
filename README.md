@@ -1,13 +1,13 @@
-# Báo cáo Bài tập Lab17 - Spark NLP Pipeline
+# ## 1. CÁC BƯC THỰC HIỆNáo cáo Bài tập Lab17 - Spark NLP Pipeline
 
 ## 1. CÁC BƯỚC THỰC HIỆN (Implementation Steps)
 
 ### 1.1 Thiết lập môi trường phát triển
-- **Ngôn ngữ lập trình**: Scala 2.12.x
+- **Ngôn ngữ lập trình**: Sca## 3. GIẢI THÍCH KẾT QUẢ ĐẠT ĐƯCa 2.12.x
 - **Framework**: Apache Spark 3.5.1 với MLlib
 - **Build tool**: SBT (Simple Build Tool) 1.11.6
 - **Java Runtime**: OpenJDK 17 LTS
-- **Dữ liệu**: C4 Common Crawl dataset (30K records)
+- **Dữ liệu**: C4 Common Crawl dataset (30K ## 6. MÔ HÌNH VÀ CÔNG CỤ Sử DỤNGecords)
 - **Document limit**: Configurable với `limitDocuments` variable (default: 1000 records)
 - **Performance monitoring**: Detailed timing measurements cho từng processing stage
 - **Vector normalization**: L2 (Euclidean) normalization
@@ -115,7 +115,7 @@ val similarDocs = transformedDF
   .limit(5)
 ```
 
-## 2. CÁCH CHẠY CODE VÀ GHI LOG KẾT QUẢ (How to Run and Log Results)
+## 2. CÁCH CHẠY CODE VÀ GHI LOG KẾT QUẢ
 
 ### 2.1 Chuẩn bị dữ liệu và môi trường
 ```bash
@@ -262,7 +262,7 @@ val cosineSimilarity = udf((ref: Vector, vec: Vector) => {
 - **Top-K selection**: Configurable, hiện tại set = 5
 - **Performance**: 1.13s để tính toán similarity cho 1000 documents
 
-## 4. KHÓ KHĂN GẶP PHẢI VÀ CÁCH GIẢI QUYẾT (Difficulties and Solutions)
+## 4. KHÓ KHĂN GẶP PHẢI VÀ CÁCH GIẢI QUYẾT
 
 ### 4.1 Vấn đề tương thích Java version
 **Khó khăn**: 
@@ -317,7 +317,7 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 - Sử dụng Spark UI để monitor job execution
 - Thêm timing measurements cho từng stage
 
-## 5. THAM KHẢO (References)
+## 5. THAM KHẢO
 
 ### 5.1 Tài liệu chính thức
 1. **Apache Spark Official Documentation**
@@ -424,7 +424,7 @@ Tất cả code được viết thủ công dựa trên Spark MLlib documentatio
 
 Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors chất lượng cao sẵn sàng cho các downstream machine learning tasks bao gồm document classification, clustering, và similarity search.
 
-## 7. CÁC THỰC NGHIỆM MỞ RỘNG (Extended Experiments)
+## 7. CÁC THỰC NGHIỆM MỞ RỘNG
 
 ### 7.1 Thực nghiệm 1: So sánh Tokenizers
 **Mục tiêu**: So sánh hiệu suất giữa RegexTokenizer và basic Tokenizer
