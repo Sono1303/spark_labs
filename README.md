@@ -26,16 +26,16 @@ libraryDependencies ++= Seq(
 ```
 
 ### 1.3 Thiết kế kiến trúc Pipeline NLP
-Pipeline được thiết kế theo mô hình ETL (Extract-Transform-Load) với 8 giai đoạn:
+Pipeline được thiết kế theo mô hình ETL (Extract-Transform-Load) với 8 giai đoạn tuần tự:
 
-1. **Stage 1**: Khởi tạo Spark Session với performance monitoring
-2. **Stage 2**: Đọc dữ liệu C4 dataset (với limitDocuments configurable)
+1. **Stage 1**: Khởi tạo Spark Session với performance monitoring và UI configuration
+2. **Stage 2**: Đọc dữ liệu C4 dataset với limitDocuments variable và materialization
 3. **Stage 3**: Tạo ML Pipeline components (RegexTokenizer → StopWordsRemover → HashingTF → IDF → Normalizer)
-4. **Stage 4**: Training NLP Pipeline với detailed timing
-5. **Stage 5**: Applying Pipeline Transformation với caching
-6. **Stage 6**: Analyzing Vocabulary Statistics và vector properties
-7. **Stage 7**: Collecting Results và Writing Files
-8. **Stage 8**: Finding Similar Documents với cosine similarity analysis
+4. **Stage 4**: Training NLP Pipeline với IDF fitting và detailed performance timing
+5. **Stage 5**: Applying Pipeline Transformation với DataFrame caching và count materialization
+6. **Stage 6**: Analyzing Vocabulary Statistics, vector properties và L2 norm verification
+7. **Stage 7**: Collecting Results và Writing detailed output files (logs + results)
+8. **Stage 8**: Document Similarity Analysis với cosine similarity calculation và top-K selection
 
 ### 1.4 Cài đặt chi tiết từng thành phần
 
@@ -49,11 +49,22 @@ val spark = SparkSession.builder()
   .getOrCreate()
 ```
 
-#### b) Đọc dữ liệu C4 Dataset
+#### b) Đọc dữ liệu C4 Dataset với limitDocuments variable
 ```scala
+// Add limitDocuments variable to customize the document limit
+val limitDocuments = 1000  // Configurable document limit variable
 val df = spark.read.json("data/c4-train.00000-of-01024-30K.json.gz")
-  .limit(1000) // Giới hạn 1000 records để xử lý nhanh hơn
+  .limit(limitDocuments)   // Sử dụng variable thay vì hard-coded value
+
+// Force DataFrame materialization để đo thời gian đọc chính xác
+val recordCount = df.count()
 ```
+
+**Lợi ích của limitDocuments variable**:
+- **Flexibility**: Dễ dàng thay đổi số lượng documents để test với datasets khác nhau
+- **Performance tuning**: Điều chỉnh cho phù hợp với memory và processing capacity
+- **Development efficiency**: Sử dụng dataset nhỏ (1000) cho development, lớn hơn cho production
+- **Reproducibility**: Đảm bảo consistent results khi re-run với cùng parameters
 
 #### c) RegexTokenizer để tách từ
 ```scala
@@ -171,18 +182,18 @@ Feature Vector Size: 20000
 
 ### 3.1 Thống kê tổng quan
 - **Số lượng records xử lý**: 1,000 documents từ C4 dataset
-- **Thời gian khởi tạo Spark**: 9.32 giây (63.5%)
-- **Thời gian đọc dữ liệu**: 2.74 giây (18.7%)
-- **Thời gian tạo pipeline**: 0.056 giây (0.4%)
-- **Thời gian fitting pipeline**: 1.61 giây (10.9%)
-- **Thời gian transform dữ liệu**: 0.61 giây (4.2%)
-- **Thời gian phân tích vocabulary**: 0.27 giây (1.9%)
-- **Thời gian similarity analysis**: 1.13 giây
-- **Tổng thời gian xử lý**: 25.04 giây
+- **Thời gian khởi tạo Spark**: 10.00 giây (36.9%)
+- **Thời gian đọc dữ liệu**: 2.87 giây (10.6%)
+- **Thời gian tạo pipeline**: 0.066 giây (0.2%)
+- **Thời gian fitting pipeline**: 1.70 giây (6.3%)
+- **Thời gian transform dữ liệu**: 0.63 giây (2.3%)
+- **Thời gian phân tích vocabulary**: 0.29 giây (1.1%)
+- **Thời gian similarity analysis**: 1.10 giây (4.1%)
+- **Tổng thời gian xử lý**: 27.09 giây
 - **Overall throughput**: 40 records/giây
-- **Training throughput**: 622 records/giây
-- **Transform throughput**: 1632 records/giây
-- **Kích thước từ vựng**: 27,009 từ unique (sau khi loại bỏ stop words)
+- **Training throughput**: 589 records/giây
+- **Transform throughput**: 1582 records/giây
+- **Kích thước từ vựng**: 27,009 từ unique (sau khi loại bỏ stop words) - Density: 27.01 terms/document
 - **Kích thước feature vector**: 20,000 chiều
 - **Vector normalization**: L2 norm = 1.000000 (perfect normalization)
 
@@ -299,8 +310,9 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 
 ### 4.4 Vấn đề performance optimization
 **Khó khăn**:
-- Cold start time của Spark khá lâu (~25s)
+- Cold start time của Spark khá lâu (~27s với initialization 10s)
 - Cần balance giữa accuracy và processing speed
+- Memory và network resource management
 
 **Giải pháp**:
 - Sử dụng `.cache()` cho DataFrames được sử dụng nhiều lần
@@ -524,10 +536,3 @@ Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors
 5. **Recommended configuration**: RegexTokenizer + HashingTF (20K) + IDF cho balance tốt nhất
 
 ---
-
----
-
-**Ngày hoàn thành**: 02/10/2025  
-**Spark Version**: 3.5.1  
-**Java Version**: OpenJDK 17 LTS
-**Comprehensive NLP Pipeline**: 8 stages với document similarity analysis
