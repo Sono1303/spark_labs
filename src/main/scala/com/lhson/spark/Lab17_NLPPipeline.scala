@@ -359,12 +359,12 @@ object Lab17_NLPPipeline {
       .withColumn("cosine_similarity", cosineSimilarityUDF(col("features")))
       .select(col("doc_id"), col("text"), col("cosine_similarity"))
       .orderBy(desc("cosine_similarity"))
-      .limit(5)
+      .limit(10)
       .collect()
     
     val similarityDuration = (System.nanoTime() - similarityStartTime) / 1e9d
     
-    println(f"\nTop 5 most similar documents (computed in $similarityDuration%.2f seconds):")
+    println(f"\nTop 10 most similar documents (computed in $similarityDuration%.2f seconds):")
     println("=" * 80)
     
     documentsWithSimilarity.zipWithIndex.foreach { case (row, index) =>
@@ -388,7 +388,7 @@ object Lab17_NLPPipeline {
       
       similarityWriter.println(f"REFERENCE DOCUMENT (ID: $referenceDocIndex):")
       similarityWriter.println(f"${referenceText.substring(0, Math.min(referenceText.length, 200))}...\n")
-      similarityWriter.println("TOP 5 MOST SIMILAR DOCUMENTS:\n")
+      similarityWriter.println("TOP 10 MOST SIMILAR DOCUMENTS:\n")
       
       documentsWithSimilarity.zipWithIndex.foreach { case (row, index) =>
         val docId = row.getAs[Long]("doc_id")

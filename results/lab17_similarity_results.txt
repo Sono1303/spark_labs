@@ -1,12 +1,12 @@
 === DOCUMENT SIMILARITY ANALYSIS RESULTS ===
-Generated on: Thu Oct 02 21:35:57 ICT 2025
-Analysis completed in: 16.257 seconds
+Generated on: Thu Oct 02 22:03:23 ICT 2025
+Analysis completed in: 15.450 seconds
 
 REFERENCE DOCUMENT (ID: 0):
 Beginners BBQ Class Taking Place in Missoula!
 Do you want to get better at making delicious BBQ? You will have the opportunity, put this on your calendar now. Thursday, September 22nd join World Class...
 
-TOP 5 MOST SIMILAR DOCUMENTS:
+TOP 10 MOST SIMILAR DOCUMENTS:
 
 1. DOCUMENT ID: 11759
    COSINE SIMILARITY: 0.233466
@@ -35,6 +35,30 @@ Bizerba® is a registered trademark of Bizerba Equipment. Parts shown are provide
    TEXT: Backyard, Backyard Bbq Ideas was posted February 16, 2019 at 2:44 pm by soulpower.info . More over Backyard Bbq Ideas has viewed by 501 visitor.
 Backyard, Cheap Backyard Bbq Ideas was posted January 7, 2019 at 4:33 pm by soulpower.info . More over Cheap Backyard Bbq Ideas has viewed by 922 visitor.
 ...
+--------------------------------------------------------------------------------
+6. DOCUMENT ID: 5307
+   COSINE SIMILARITY: 0.179226
+   TEXT: SPECIAL! This class is a FREE ADD-ON if you book one or more classes in 2017/2018. FREE meditation class must be scheduled within ½ hour prior to or following any other scheduled class....
+--------------------------------------------------------------------------------
+7. DOCUMENT ID: 29872
+   COSINE SIMILARITY: 0.172502
+   TEXT: The news: Imagine a world where you could eat all the meat you ever wanted — without sacrificing a single animal&apos;s life.
+The idea of synthetic meat is not a new one. Biotech start-ups have been trying for years to create lab-grown meat that can be scaled to feed the general populace; just last ...
+--------------------------------------------------------------------------------
+8. DOCUMENT ID: 25435
+   COSINE SIMILARITY: 0.172308
+   TEXT: You don’t have to cook boring BBQ try some of our famous Rubs you cannot go wrong.
+The Spice Agent offered up by our BBQ and Grilling selection is Fabulous!!! Whether you are a weekend tailgater or a master of your BBQ- there is literally a world of flavor to explore.
+You’ll find classic rubs from a...
+--------------------------------------------------------------------------------
+9. DOCUMENT ID: 19074
+   COSINE SIMILARITY: 0.172086
+   TEXT: This sand-colored Gildan® brand soft-style t-shirt is a Bob's Bitchin' BBQ customer favorite! The front boasts a tri-color design featuring the Peace, Love & BBQ mantra. The back of the shirt features our tagline "So good you'll lick your napkin" and website so you'll never forget where to get more ...
+--------------------------------------------------------------------------------
+10. DOCUMENT ID: 20572
+   COSINE SIMILARITY: 0.170289
+   TEXT: We are always looking for new course ideas and instructors to teach inspiring topics. If you have an idea or a talent you would like to share, please complete our course proposal form.
+For more information about continuing education program areas, contact one of our customized training representativ...
 --------------------------------------------------------------------------------
 
 NOTES:

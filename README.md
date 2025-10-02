@@ -14,6 +14,7 @@
 - **Vector normalization**: L2 (Euclidean) normalization
 - **Document similarity**: Cosine similarity với top-K document search
 - **Demo features**: 5 instructor-guided demonstrations
+
 ### 1.2 Cấu hình project trong build.sbt
 ```scala
 name := "spark-nlp-labs"
@@ -39,12 +40,12 @@ Pipeline được thiết kế theo mô hình ETL (Extract-Transform-Load) với
 5. **Stage 5**: Applying Pipeline Transformation với DataFrame caching và sparse vector analysis
 6. **Stage 6**: Analyzing Vocabulary Statistics với CountVectorizer vocabulary (187K → 20K terms)
 7. **Stage 7**: Collecting Results và Writing detailed output files với normalization demos
-8. **Stage 8**: Document Similarity Analysis với cosine similarity và top-10 selection
+8. **Stage 8**: Document Similarity Analysis với cosine similarity và top-5 selection
 
 #### 5 Demo Features theo yêu cầu:
 1. **Sparse vector representation**: Analysis of document vectors với sparsity 99.7%+
 2. **Normalization of count vectors**: L2 normalization demo với before/after comparison
-3. **CountVectorizer pipeline**: tokenizer → countVectorizer → idf implementation
+3. **CountVectorizer pipeline**: tokenizer → CountVectorizer → IDF implementation
 4. **30K-doc corpus demo**: Large-scale processing với 30,000 documents
 5. **Top-10 similarity search**: Cosine similarity với document matching
 
@@ -312,7 +313,7 @@ val cosineSimilarity = udf((ref: Vector, vec: Vector) => {
 #### c) Results Analysis
 - **File output**: `results/lab17_similarity_results.txt`
 - **Format**: Structured text với similarity scores, document IDs, và text previews
-- **Top-K selection**: Configurable, hiện tại set = 5
+- **Top-K selection**: Configurable, hiện tại set = 10
 - **Performance**: 1.10s để tính toán similarity cho 1000 documents
 
 ## 4. KHÓ KHĂN GẶP PHẢI VÀ CÁCH GIẢI QUYẾT
@@ -461,7 +462,7 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 - Thêm Normalizer stage để chuẩn hóa TF-IDF vectors
 - Tạo cosine similarity UDF cho vector comparison
 - Select reference document (ID: 0) và tính similarity với tất cả documents khác
-- Sắp xếp và lấy top-5 documents có similarity cao nhất
+- Sắp xếp và lấy top-10 documents có similarity cao nhất
 
 **Kết quả**:
 - **Thời gian tính toán**: 1.10 giây cho 1000 documents

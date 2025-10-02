@@ -1,21 +1,21 @@
 === COMPREHENSIVE NLP PIPELINE PERFORMANCE REPORT ===
-Generated on: Thu Oct 02 21:35:40 ICT 2025
+Generated on: Thu Oct 02 22:03:07 ICT 2025
 Records processed: 30000
 
 --- DETAILED STAGE-BY-STAGE PERFORMANCE ---
-Stage 1 - Spark Initialization: 9.941 seconds (30.4%)
-Stage 2 - Data Reading: 3.911 seconds (12.0%)
-Stage 3 - Pipeline Creation: 0.085 seconds (0.3%)
-Stage 4 - Pipeline Training: 8.938 seconds (27.4%)
-Stage 5 - Data Transformation: 8.693 seconds (26.6%)
-Stage 6 - Vocabulary Analysis: 1.008 seconds (3.1%)
-Stage 7 - Results Collection: 0.079 seconds (0.2%)
+Stage 1 - Spark Initialization: 10.113 seconds (32.1%)
+Stage 2 - Data Reading: 3.407 seconds (10.8%)
+Stage 3 - Pipeline Creation: 0.063 seconds (0.2%)
+Stage 4 - Pipeline Training: 8.708 seconds (27.6%)
+Stage 5 - Data Transformation: 8.269 seconds (26.2%)
+Stage 6 - Vocabulary Analysis: 0.919 seconds (2.9%)
+Stage 7 - Results Collection: 0.066 seconds (0.2%)
 
 --- PERFORMANCE SUMMARY ---
-Total Processing Time: 32.656 seconds
-Overall Throughput: 919 records/second
-Training Throughput: 3356 records/second
-Transform Throughput: 3451 records/second
+Total Processing Time: 31.545 seconds
+Overall Throughput: 951 records/second
+Training Throughput: 3445 records/second
+Transform Throughput: 3628 records/second
 
 --- DATA STATISTICS ---
 Vocabulary size (unique terms): 187214
