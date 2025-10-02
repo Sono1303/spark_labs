@@ -426,12 +426,12 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 
 | Thực nghiệm | Trạng thái | Thời gian Fitting | Vocabulary Size | Feature Vector Size | Accuracy |
 |-------------|------------|-------------------|-----------------|---------------------|-----------|
-| Baseline (RegexTokenizer + HashingTF 20K) | HOANTHANH | 1.64s | 27,009 | 20,000 | N/A |
-| Basic Tokenizer + HashingTF 20K | HOANTHANH | 1.85s | 46,838 | 20,000 | N/A |
-| Basic Tokenizer + HashingTF 1K | HOANTHANH | 2.21s | 46,838 | 1,000 | N/A |
-| Basic Tokenizer + HashingTF 1K + LR | HOANTHANH | 4.07s | 46,838 | 1,000 | 98.20% |
-| RegexTokenizer + HashingTF 20K + Normalizer + Similarity | HOANTHANH | 1.61s | 27,009 | 20,000 | N/A (similarity) |
-| Basic Tokenizer + Word2Vec + LR | THATBAI | Failed | N/A | N/A | N/A |
+| Baseline (RegexTokenizer + HashingTF 20K) | Success | 1.64s | 27,009 | 20,000 | N/A |
+| Basic Tokenizer + HashingTF 20K | Success | 1.85s | 46,838 | 20,000 | N/A |
+| Basic Tokenizer + HashingTF 1K | Success | 2.21s | 46,838 | 1,000 | N/A |
+| Basic Tokenizer + HashingTF 1K + LR | Success | 4.07s | 46,838 | 1,000 | 98.20% |
+| RegexTokenizer + HashingTF 20K + Normalizer + Similarity | Success | 1.61s | 27,009 | 20,000 | N/A (similarity) |
+| Basic Tokenizer + Word2Vec + LR | Fail | Failed | N/A | N/A | N/A |
 
 **Kết luận thực nghiệm**:
 1. **Tokenizer choice** ảnh hưởng đáng kể đến vocabulary size và processing time
