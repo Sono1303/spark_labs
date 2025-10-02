@@ -60,12 +60,6 @@ val df = spark.read.json("data/c4-train.00000-of-01024-30K.json.gz")
 val recordCount = df.count()
 ```
 
-**Lợi ích của limitDocuments variable**:
-- **Flexibility**: Dễ dàng thay đổi số lượng documents để test với datasets khác nhau
-- **Performance tuning**: Điều chỉnh cho phù hợp với memory và processing capacity
-- **Development efficiency**: Sử dụng dataset nhỏ (1000) cho development, lớn hơn cho production
-- **Reproducibility**: Đảm bảo consistent results khi re-run với cùng parameters
-
 #### c) RegexTokenizer để tách từ
 ```scala
 val tokenizer = new RegexTokenizer()
@@ -329,56 +323,18 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 - Sử dụng Spark UI để monitor job execution
 - Thêm timing measurements cho từng stage
 
-## 5. THAM KHẢO
+## 5. MÔ HÌNH VÀ CÔNG CỤ SỬ DỤNG
 
-### 5.1 Tài liệu chính thức
-1. **Apache Spark Official Documentation**
-   - URL: https://spark.apache.org/docs/3.5.1/
-   - Mục đích: API reference và best practices
-
-2. **Spark MLlib Programming Guide**
-   - URL: https://spark.apache.org/docs/3.5.1/ml-guide.html
-   - Mục đích: Machine Learning pipeline design
-
-3. **Scala Documentation**
-   - URL: https://docs.scala-lang.org/
-   - Mục đích: Scala language reference
-
-### 5.2 Dataset và môi trường
-4. **Common Crawl C4 Dataset**
-   - Source: https://commoncrawl.org/
-   - Mục đích: Large-scale text data cho NLP tasks
-
-5. **SBT Reference Manual**
-   - URL: https://www.scala-sbt.org/1.x/docs/
-   - Mục đích: Build configuration và dependency management
-
-### 5.3 Technical resources
-6. **TF-IDF Algorithm Documentation**
-   - Source: Apache Spark MLlib documentation
-   - Mục đích: Understanding vectorization algorithms
-
-7. **RegexTokenizer Implementation**
-   - Source: Spark MLlib source code
-   - Mục đích: Tokenization pattern design
-
-### 5.4 Troubleshooting resources
-8. **Java 17 + Spark Compatibility Guide**
-   - Various Stack Overflow threads và GitHub issues
-   - Mục đích: Giải quyết compatibility issues
-
-## 6. MÔ HÌNH VÀ CÔNG CỤ SỬ DỤNG
-
-### 6.1 Pre-built components (không sử dụng pre-trained models)
+### 5.1 Pre-built components (không sử dụng pre-trained models)
 **Lưu ý**: Bài tập này không sử dụng pre-trained models mà xây dựng pipeline từ các building blocks cơ bản.
 
-### 6.2 Spark MLlib Components
+### 5.2 Spark MLlib Components
 - **RegexTokenizer**: Built-in tokenizer của Spark MLlib
 - **StopWordsRemover**: Sử dụng English stop words list mặc định
 - **HashingTF**: Hashing-based Term Frequency implementation
 - **IDF**: Inverse Document Frequency calculator
 
-### 6.3 Configuration parameters
+### 5.3 Configuration parameters
 ```scala
 // Tokenizer config
 .setPattern("\\W") // Split on non-word characters
@@ -390,55 +346,9 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 // Sử dụng default parameters (minDocFreq = 0)
 ```
 
-### 6.4 No external AI models used
-Project này không sử dụng:
-- GPT/ChatGPT cho code generation
-- Pre-trained word embeddings (Word2Vec, GloVe)
-- External NLP APIs
-- Cloud-based ML services
+## 6. CÁC THỰC NGHIỆM MỞ RỘNG
 
-Tất cả code được viết thủ công dựa trên Spark MLlib documentation và best practices.
-
----
-
-## Kết luận
-
-### Tất cả tiêu chí đã hoàn thành (12/12 yêu cầu):
-
-#### Core Requirements (8/8):
-- **Read C4 dataset** into Spark DataFrame (Stage 2)
-- **Implement Spark ML Pipeline** với 5-stage architecture
-- **Use RegexTokenizer** cho tokenization với pattern `\\W`
-- **Use StopWordsRemover** để loại bỏ English stop words
-- **Use HashingTF and IDF** cho vectorization (20,000 features)
-- **Fit pipeline and transform data** với caching optimization
-- **Save results to file** (`results/lab17_pipeline_output.txt`)
-- **Log the process** (`log/lab17_metrics.log`)
-
-#### Extended Features (4/4):
-- **Add limitDocuments variable** để customize document limit (1000 records)
-- **Add detailed performance measurement** cho 8 processing stages
-- **Add Normalizer layer** để normalize vectors với L2 norm
-- **Search and display top K similar documents** với cosine similarity
-
-### Performance Summary:
-- **Total execution time**: 25.04 giây
-- **Overall throughput**: 40 records/giây
-- **Vocabulary generated**: 27,009 unique terms
-- **Feature dimensions**: 20,000
-- **Vector normalization**: L2 norm = 1.000000 (perfect)
-- **Similarity analysis**: 1.13s cho 1000 documents
-
-### Files Generated:
-1. **Performance log**: `log/lab17_metrics.log`
-2. **Pipeline results**: `results/lab17_pipeline_output.txt`
-3. **Similarity analysis**: `results/lab17_similarity_results.txt`
-
-Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors chất lượng cao sẵn sàng cho các downstream machine learning tasks bao gồm document classification, clustering, và similarity search.
-
-## 7. CÁC THỰC NGHIỆM MỞ RỘNG
-
-### 7.1 Thực nghiệm 1: So sánh Tokenizers
+### 6.1 Thực nghiệm 1: So sánh Tokenizers
 **Mục tiêu**: So sánh hiệu suất giữa RegexTokenizer và basic Tokenizer
 
 **Thực hiện**:
@@ -452,7 +362,7 @@ Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors
 - **Ưu điểm Basic Tokenizer**: Đơn giản, nhanh chóng
 - **Ưu điểm RegexTokenizer**: Linh hoạt hơn với regex patterns, tạo ra vocabulary sạch hơn
 
-### 7.2 Thực nghiệm 2: Ảnh hưởng kích thước Feature Vector
+### 6.2 Thực nghiệm 2: Ảnh hưởng kích thước Feature Vector
 **Mục tiêu**: Kiểm tra tác động của việc giảm numFeatures từ 20,000 xuống 1,000
 
 **Thực hiện**:
@@ -466,7 +376,7 @@ Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors
 - **Phân tích**: Giảm features làm tăng hash collisions, có thể mất thông tin nhưng tiết kiệm bộ nhớ
 - **Trade-off**: Memory efficiency vs Information preservation
 
-### 7.3 Thực nghiệm 3: Mở rộng Pipeline với Classification
+### 6.3 Thực nghiệm 3: Mở rộng Pipeline với Classification
 **Mục tiêu**: Thêm LogisticRegression để chuyển từ feature extraction sang machine learning task
 
 **Thực hiện**:
@@ -482,7 +392,7 @@ Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors
 - **Phân tích**: Model đạt accuracy rất cao (98.20%) với task classification đơn giản
 - **Insight**: TF-IDF features rất hiệu quả cho text classification tasks
 
-### 7.4 Thực nghiệm 4: Word2Vec Implementation (THẤT BẠI)
+### 6.4 Thực nghiệm 4: Word2Vec Implementation (THẤT BẠI)
 **Mục tiêu**: Thay thế HashingTF + IDF bằng Word2Vec để tạo word embeddings
 
 **Thực hiện**:
@@ -496,12 +406,7 @@ Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors
 - **Root cause**: Java module system không cho phép access vào java.lang.invoke
 - **Status**: BLOCKED - Cannot complete with current environment
 
-**Giải pháp thử nghiệm**:
-- Downgrade xuống Java 11 (không khả thi trong môi trường hiện tại)
-- Sử dụng Java serializer thay vì Kryo (performance impact)
-- Stick with HashingTF + IDF approach (recommended)
-
-### 7.5 Thực nghiệm mới: Document Similarity Analysis
+### 6.5 Thực nghiệm 5: Document Similarity Analysis
 **Mục tiêu**: Implement tính năng tìm kiếm tài liệu tương tự với cosine similarity
 
 **Thực hiện**:
@@ -517,7 +422,7 @@ Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors
 - **Phân tích chất lượng**: Algorithm tìm thấy các documents liên quan về food/cooking và class/training topics
 - **Files generated**: `results/lab17_similarity_results.txt`
 
-### 7.6 Tổng kết các thực nghiệm
+### 6.6 Tổng kết các thực nghiệm
 
 | Thực nghiệm | Trạng thái | Thời gian Fitting | Vocabulary Size | Feature Vector Size | Accuracy |
 |-------------|------------|-------------------|-----------------|---------------------|-----------|
