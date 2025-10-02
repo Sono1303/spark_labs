@@ -184,7 +184,7 @@ Feature Vector Size: 20000
 - **Thời gian phân tích vocabulary**: 0.29 giây (1.1%)
 - **Thời gian similarity analysis**: 1.10 giây (4.1%)
 - **Tổng thời gian xử lý**: 27.09 giây
-- **Overall throughput**: 40 records/giây
+- **Overall throughput**: 37 records/giây
 - **Training throughput**: 589 records/giây
 - **Transform throughput**: 1582 records/giây
 - **Kích thước từ vựng**: 27,009 từ unique (sau khi loại bỏ stop words) - Density: 27.01 terms/document
@@ -219,8 +219,8 @@ Feature Vector Size: 20000
 - **20,000 features**: Đủ lớn để capture các patterns quan trọng
 
 #### b) Hiệu suất xử lý
-- **Pipeline fitting nhanh**: 1.64s cho 1000 documents
-- **Transform hiệu quả**: 0.56s cho việc áp dụng pipeline
+- **Pipeline fitting nhanh**: 1.70s cho 1000 documents
+- **Transform hiệu quả**: 0.63s cho việc áp dụng pipeline
 - **Scalable**: Có thể mở rộng cho datasets lớn hơn
 
 #### c) Chất lượng dữ liệu đầu ra
@@ -232,7 +232,7 @@ Feature Vector Size: 20000
 
 #### d) Document Similarity Analysis
 - **Reference document selection**: Tự động chọn document ID 0 làm reference
-- **Similarity calculation time**: 1.13 giây cho 1000 documents
+- **Similarity calculation time**: 1.10 giây cho 1000 documents
 - **Top-5 similar documents**:
   1. Mercedes X-Class (0.130387) - Automotive content
   2. Italian Pasta Salad (0.085494) - Food/nutrition content  
@@ -265,7 +265,7 @@ val cosineSimilarity = udf((ref: Vector, vec: Vector) => {
 - **File output**: `results/lab17_similarity_results.txt`
 - **Format**: Structured text với similarity scores, document IDs, và text previews
 - **Top-K selection**: Configurable, hiện tại set = 5
-- **Performance**: 1.13s để tính toán similarity cho 1000 documents
+- **Performance**: 1.10s để tính toán similarity cho 1000 documents
 
 ## 4. KHÓ KHĂN GẶP PHẢI VÀ CÁCH GIẢI QUYẾT
 
@@ -356,7 +356,7 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 - Chạy pipeline và so sánh kết quả
 
 **Kết quả**:
-- **RegexTokenizer** (gốc): 27,009 từ unique, fitting 1.64s, transform 0.56s
+- **RegexTokenizer** (gốc): 27,009 từ unique, fitting 1.70s, transform 0.63s
 - **Basic Tokenizer**: 46,838 từ unique, fitting 1.85s, transform 0.64s
 - **Phân tích**: Basic Tokenizer tạo ra nhiều từ hơn (46,838 vs 27,009) vì không loại bỏ dấu câu như RegexTokenizer
 - **Ưu điểm Basic Tokenizer**: Đơn giản, nhanh chóng
@@ -370,7 +370,7 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 - Đo lường thời gian và chất lượng vector
 
 **Kết quả**:
-- **20,000 features** (gốc): Feature vector size 20,000, fitting 1.64s, transform 0.56s
+- **20,000 features** (gốc): Feature vector size 20,000, fitting 1.70s, transform 0.63s
 - **1,000 features**: Feature vector size 1,000, fitting 2.21s, transform 0.76s
 - **Hash collisions**: Tăng đáng kể với vocabulary 46,838 từ nhưng chỉ 1,000 hash buckets
 - **Phân tích**: Giảm features làm tăng hash collisions, có thể mất thông tin nhưng tiết kiệm bộ nhớ
@@ -416,7 +416,7 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 - Sắp xếp và lấy top-5 documents có similarity cao nhất
 
 **Kết quả**:
-- **Thời gian tính toán**: 1.13 giây cho 1000 documents
+- **Thời gian tính toán**: 1.10 giây cho 1000 documents
 - **Reference document**: "Beginners BBQ Class" (food/cooking content)
 - **Top similar documents**: Mercedes X-Class (0.130), Italian Pasta (0.085), Brazilian Churrasco (0.080), Museum tours (0.080), Fire simulator (0.076)
 - **Phân tích chất lượng**: Algorithm tìm thấy các documents liên quan về food/cooking và class/training topics
@@ -426,11 +426,11 @@ sbt -J-Xmx4g "runMain com.lhson.spark.Lab17_NLPPipeline"
 
 | Thực nghiệm | Trạng thái | Thời gian Fitting | Vocabulary Size | Feature Vector Size | Accuracy |
 |-------------|------------|-------------------|-----------------|---------------------|-----------|
-| Baseline (RegexTokenizer + HashingTF 20K) | Success | 1.64s | 27,009 | 20,000 | N/A |
+| Baseline (RegexTokenizer + HashingTF 20K) | Success | 1.70s | 27,009 | 20,000 | N/A |
 | Basic Tokenizer + HashingTF 20K | Success | 1.85s | 46,838 | 20,000 | N/A |
 | Basic Tokenizer + HashingTF 1K | Success | 2.21s | 46,838 | 1,000 | N/A |
 | Basic Tokenizer + HashingTF 1K + LR | Success | 4.07s | 46,838 | 1,000 | 98.20% |
-| RegexTokenizer + HashingTF 20K + Normalizer + Similarity | Success | 1.61s | 27,009 | 20,000 | N/A (similarity) |
+| RegexTokenizer + HashingTF 20K + Normalizer + Similarity | Success | 1.70s | 27,009 | 20,000 | N/A (similarity) |
 | Basic Tokenizer + Word2Vec + LR | Fail | Failed | N/A | N/A | N/A |
 
 **Kết luận thực nghiệm**:
