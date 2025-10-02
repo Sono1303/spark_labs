@@ -1,4 +1,4 @@
-# Báo cáo Bài tập Lab17 - Spark NLP Pipeline
+# Báo cáo Lab17 - Spark NLP Pipeline
 
 ## 1. CÁC BƯỚC THỰC HIỆN
 
