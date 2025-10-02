@@ -9,22 +9,9 @@
 - **Java Runtime**: OpenJDK 17 LTS
 - **Dữ liệu**: C4 Common Crawl dataset (30K records)
 - **Document limit**: Configurable với `limitDocuments` variable (default: 1000 records)
-- **Performanc### 7.5 Thực nghiệm mới: Document Similarity Analysis
-**Mục tiêu**: Implement tính năng tìm kiếm tài liệu tương tự với cosine similarity
-
-**Thực hiện**:
-- Thêm Normalizer stage để chuẩn hóa TF-IDF vectors
-- Tạo cosine similarity UDF cho vector comparison
-- Select reference document (ID: 0) và tính similarity với tất cả documents khác
-- Sắp xếp và lấy top-5 documents có similarity cao nhất
-
-**Kết quả**:
-- **Thời gian tính toán**: 1.13 giây cho 1000 documents
-- **Reference document**: "Beginners BBQ Class" (food/cooking content)
-- **Top similar documents**: Mercedes X-Class (0.130), Italian Pasta (0.085), Brazilian Churrasco (0.080), Museum tours (0.080), Fire simulator (0.076)
-- **Phân tích chất lượng**: Algorithm tìm thấy các documents liên quan về food/cooking và class/training topics
-- **Files generated**: `results/lab17_similarity_results.txt`
-
+- **Performance monitoring**: Detailed timing measurements cho từng processing stage
+- **Vector normalization**: L2 (Euclidean) normalization
+- **Document similarity**: Cosine similarity với top-K document search
 ### 1.2 Cấu hình project trong build.sbt
 ```scala
 name := "spark-nlp-labs"
@@ -404,23 +391,23 @@ Tất cả code được viết thủ công dựa trên Spark MLlib documentatio
 
 ## Kết luận
 
-### ✅ Tất cả tiêu chí đã hoàn thành (12/12 yêu cầu):
+### Tất cả tiêu chí đã hoàn thành (12/12 yêu cầu):
 
 #### Core Requirements (8/8):
-- ✅ **Read C4 dataset** into Spark DataFrame (Stage 2)
-- ✅ **Implement Spark ML Pipeline** với 5-stage architecture
-- ✅ **Use RegexTokenizer** cho tokenization với pattern `\\W`
-- ✅ **Use StopWordsRemover** để loại bỏ English stop words
-- ✅ **Use HashingTF and IDF** cho vectorization (20,000 features)
-- ✅ **Fit pipeline and transform data** với caching optimization
-- ✅ **Save results to file** (`results/lab17_pipeline_output.txt`)
-- ✅ **Log the process** (`log/lab17_metrics.log`)
+- **Read C4 dataset** into Spark DataFrame (Stage 2)
+- **Implement Spark ML Pipeline** với 5-stage architecture
+- **Use RegexTokenizer** cho tokenization với pattern `\\W`
+- **Use StopWordsRemover** để loại bỏ English stop words
+- **Use HashingTF and IDF** cho vectorization (20,000 features)
+- **Fit pipeline and transform data** với caching optimization
+- **Save results to file** (`results/lab17_pipeline_output.txt`)
+- **Log the process** (`log/lab17_metrics.log`)
 
 #### Extended Features (4/4):
-- ✅ **Add limitDocuments variable** để customize document limit (1000 records)
-- ✅ **Add detailed performance measurement** cho 8 processing stages
-- ✅ **Add Normalizer layer** để normalize vectors với L2 norm
-- ✅ **Search and display top K similar documents** với cosine similarity
+- **Add limitDocuments variable** để customize document limit (1000 records)
+- **Add detailed performance measurement** cho 8 processing stages
+- **Add Normalizer layer** để normalize vectors với L2 norm
+- **Search and display top K similar documents** với cosine similarity
 
 ### Performance Summary:
 - **Total execution time**: 25.04 giây
@@ -502,28 +489,32 @@ Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors
 - Sử dụng Java serializer thay vì Kryo (performance impact)
 - Stick with HashingTF + IDF approach (recommended)
 
-### 7.5 Tổng kết các thực nghiệm
+### 7.5 Thực nghiệm mới: Document Similarity Analysis
+**Mục tiêu**: Implement tính năng tìm kiếm tài liệu tương tự với cosine similarity
 
-| Thực nghiệm | Trạng thái | Thời gian Fitting | Vocabulary Size | Feature Vector Size | Accuracy |
-|-------------|------------|-------------------|-----------------|---------------------|----------|
-| Baseline (RegexTokenizer + HashingTF 20K) | ✅ | 1.64s | 27,009 | 20,000 | N/A |
-| Basic Tokenizer + HashingTF 20K | ✅ | 1.85s | 46,838 | 20,000 | N/A |
-| Basic Tokenizer + HashingTF 1K | ✅ | 2.21s | 46,838 | 1,000 | N/A |
-| Basic Tokenizer + HashingTF 1K + LR | ✅ | 4.07s | 46,838 | 1,000 | 98.20% |
-| Basic Tokenizer + Word2Vec + LR | ❌ | Failed | N/A | N/A | N/A |
+**Thực hiện**:
+- Thêm Normalizer stage để chuẩn hóa TF-IDF vectors
+- Tạo cosine similarity UDF cho vector comparison
+- Select reference document (ID: 0) và tính similarity với tất cả documents khác
+- Sắp xếp và lấy top-5 documents có similarity cao nhất
+
+**Kết quả**:
+- **Thời gian tính toán**: 1.13 giây cho 1000 documents
+- **Reference document**: "Beginners BBQ Class" (food/cooking content)
+- **Top similar documents**: Mercedes X-Class (0.130), Italian Pasta (0.085), Brazilian Churrasco (0.080), Museum tours (0.080), Fire simulator (0.076)
+- **Phân tích chất lượng**: Algorithm tìm thấy các documents liên quan về food/cooking và class/training topics
+- **Files generated**: `results/lab17_similarity_results.txt`
 
 ### 7.6 Tổng kết các thực nghiệm
 
 | Thực nghiệm | Trạng thái | Thời gian Fitting | Vocabulary Size | Feature Vector Size | Accuracy |
 |-------------|------------|-------------------|-----------------|---------------------|-----------|
-| Baseline (RegexTokenizer + HashingTF 20K) | ✅ | 1.64s | 27,009 | 20,000 | N/A |
-| Basic Tokenizer + HashingTF 20K | ✅ | 1.85s | 46,838 | 20,000 | N/A |
-| Basic Tokenizer + HashingTF 1K | ✅ | 2.21s | 46,838 | 1,000 | N/A |
-| Basic Tokenizer + HashingTF 1K + LR | ✅ | 4.07s | 46,838 | 1,000 | 98.20% |
-| RegexTokenizer + HashingTF 20K + Normalizer + Similarity | ✅ | 1.61s | 27,009 | 20,000 | N/A (similarity) |
-| Basic Tokenizer + Word2Vec + LR | ❌ | Failed | N/A | N/A | N/A |ing**: Detailed timing measurements cho từng processing stage
-- **Vector normalization**: L2 (Euclidean) normalization
-- **Document similarity**: Cosine similarity với top-K document search
+| Baseline (RegexTokenizer + HashingTF 20K) | HOANTHANH | 1.64s | 27,009 | 20,000 | N/A |
+| Basic Tokenizer + HashingTF 20K | HOANTHANH | 1.85s | 46,838 | 20,000 | N/A |
+| Basic Tokenizer + HashingTF 1K | HOANTHANH | 2.21s | 46,838 | 1,000 | N/A |
+| Basic Tokenizer + HashingTF 1K + LR | HOANTHANH | 4.07s | 46,838 | 1,000 | 98.20% |
+| RegexTokenizer + HashingTF 20K + Normalizer + Similarity | HOANTHANH | 1.61s | 27,009 | 20,000 | N/A (similarity) |
+| Basic Tokenizer + Word2Vec + LR | THATBAI | Failed | N/A | N/A | N/A |
 
 **Kết luận thực nghiệm**:
 1. **Tokenizer choice** ảnh hưởng đáng kể đến vocabulary size và processing time
@@ -534,6 +525,9 @@ Pipeline hoạt động ổn định, hiệu quả, và tạo ra feature vectors
 
 ---
 
-**Ngày hoàn thành**: 01/10/2025  
+---
+
+**Ngày hoàn thành**: 02/10/2025  
 **Spark Version**: 3.5.1  
 **Java Version**: OpenJDK 17 LTS
+**Comprehensive NLP Pipeline**: 8 stages với document similarity analysis
