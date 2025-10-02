@@ -2,7 +2,7 @@ package com.lhson.spark
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.ml.Pipeline
-import org.apache.spark.ml.feature.{HashingTF, IDF, Normalizer, RegexTokenizer, StopWordsRemover, Tokenizer, Word2Vec}
+import org.apache.spark.ml.feature.{CountVectorizer, HashingTF, IDF, Normalizer, RegexTokenizer, StopWordsRemover, Tokenizer, Word2Vec}
 import org.apache.spark.sql.functions._
 import org.apache.spark.ml.linalg.Vector
 import java.io.{File, PrintWriter}
@@ -49,10 +49,8 @@ object Lab17_NLPPipeline {
     println("\n=== STAGE 2: Reading C4 Dataset ===")
     val dataReadStartTime = System.nanoTime()
     
-    // REQUIREMENT: Add limitDocuments variable to customize the document limit
-    // Configurable variable để giới hạn số lượng documents xử lý
-    // Giúp kiểm soát memory usage và thời gian xử lý cho testing/development
-    val limitDocuments = 1000
+    // Configurable document limit for processing (30K for comprehensive demo)
+    val limitDocuments = 30000
     
     // REQUIREMENT: Read the C4 dataset into a Spark DataFrame
     // Đọc C4 Common Crawl dataset (compressed JSON format) vào Spark DataFrame
